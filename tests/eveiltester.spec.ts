@@ -24,8 +24,11 @@ test.describe('Hover Page', () => {
     await page.waitForTimeout(1000);
   });
 
-  test('should clear text input field when an item is added', async ({ page }) => {
-    //TODO
+  test('Should be able to drag and drop', async ({ page }) => {
+    await page.getByText('Drag And Drop Test Page (JavaScript)').click();
+    await page.waitForURL(/drag-drop-javascript/);
+    await page.getByText('Drag Me').first().dragTo(page.getByText('Drop here', { exact: true }));
+    await expect(page.getByText('Dropped!')).toBeVisible();
   });
 
   test('TBD', async ({ page }) => {
