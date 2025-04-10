@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test.describe('Hover Page', () => {
+test.describe('Evil Tester Test Page', () => {
   test('Should be able to observe hover behavior', async ({ page }) => {
     const topHoverText = page.getByText('paragraph');
     const bottomHoverText = page.getByText('child div content');
