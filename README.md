@@ -1,10 +1,10 @@
 ## About this Repo
 
-This repository is a place for me to demonstrate the style I like to use in my playwright tests, tricks I like to use and new things I'm trying to learn. I intent for this is not just demonstrate that I can automate in Playwright but that I understand how to build a framework (including reporting, CI, etc)
+This repository demonstrates my approach to writing Playwright tests, highlighting techniques I use, tricks I find helpful, and new concepts I'm exploring. It is designed to demonstrate my ability to automate with Playwright but also to illustrate my understanding of building a complete testing framework, including reporting, continuous integration, and more.
 
 ## About the Author
 
-Beth Surry is a quality engineer with a passion for automation and testing. I enjoy writing tests with impact, and providing and analysis of tests with visibity and reporting.
+[Beth Surry](https://www.linkedin.com/in/elizabeth-surry/)  - I am a quality engineer with a passion for automation and testing. I enjoy writing tests with impact, and providing and analysis of tests with visibity and reporting.
 
 ## Tools and Packages and other references
 
