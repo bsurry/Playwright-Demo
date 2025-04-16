@@ -24,6 +24,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? [['dot'], ['html']] : [['list'], ['html'], ["allure-playwright"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 40000,
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://coffee-cart.app/',

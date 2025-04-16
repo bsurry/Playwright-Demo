@@ -1,12 +1,15 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
 
 test.beforeEach(async ({ page }) => {
+  await tag(myTags.eviltester);
   await page.goto('/');
 });
 
 test.describe('Evil Tester Test Page', () => {
   test.use({baseURL: 'https://testpages.eviltester.com/styled/index.html'}); //TODO does this work after the switch from main config
   test('Should be able to observe hover behavior', async ({ page }) => {
+    await feature(myFeaturePrefixes.hover, 'Hover-Behavior');
     const topHoverText = page.getByText('paragraph');
     const bottomHoverText = page.getByText('child div content');
     await page.getByText('Hover Test Page').click();
@@ -25,6 +28,7 @@ test.describe('Evil Tester Test Page', () => {
   });
 
   test('Should be able to drag and drop', async ({ page }) => {
+    await feature(myFeaturePrefixes.dragDrop, 'Drag-and-drop-Behavior');
     await test.step('Navigate to Drag and Drop', async () => {
       await page.getByText('Drag And Drop Test Page (JavaScript)').click();
       await page.waitForURL(/drag-drop-javascript/);
