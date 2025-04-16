@@ -2,11 +2,23 @@
 import * as allure from "allure-js-commons";
 
 export enum myTags {
-    smoke = 'smoke',
-    regression = 'regression',
-    sanity = 'sanity',
+    coffee = 'coffee',
+    eviltester = 'eviltester',
 }
 
-export async function tag(tag: string) {
+export enum myFeaturePrefixes {
+    addToCart = 'ADDTOCART',
+    cart = 'CART',
+    checkout = 'CHECKOUT',
+    deals = 'DEALS',
+    hover = 'HOVER',
+    dragDrop = 'DRAGDROP',
+}
+
+export async function tag(tag: myTags) {
     await allure.tag(tag);
+}
+
+export async function feature(prefix: myFeaturePrefixes, feature: string) {
+    await allure.feature(`${prefix}-${feature}`);
 }

@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { addCoffeeToCart, checkCartTotal, checkCartCount } from '../test-helpers/coffee';
+import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
+
 
 const coffeeItems = [
     { testid: 'Espresso', name: 'Espresso', price: 10 },
@@ -14,6 +17,7 @@ const coffeeItems = [
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    await tag(myTags.coffee);
 });
 
 test.describe('Coffee Cart Main Page', () => {
@@ -35,29 +39,33 @@ test.describe('Coffee Cart Main Page', () => {
 test.describe('Coffee Cart - Add to Cart', () => {
     test('should add a coffee to the cart', async ({ page }) => {
         const item = coffeeItems[0];
-        await page.getByRole('listitem').filter({has: page.getByTestId(item.testid)}).click();
-        await expect(page.getByTestId('checkout')).toHaveText(new RegExp(`${item.price}.00`));
-        await expect(page.getByRole('link', { name: 'cart' })).toHaveText(/1/);
+        await addCoffeeToCart(page, item.testid);
+        await checkCartTotal(page, item.price.toString());
+        await checkCartCount(page, 1);
     });
 
     test('should add multiple coffees to the cart (all 9)', async ({ page }) => {
         let total = 0;
         for (const item of coffeeItems) {
-            await page.getByRole('listitem').filter({has: page.getByTestId(item.testid)}).click();
+            await addCoffeeToCart(page, item.testid);
             total += item.price;
-            await expect(page.getByTestId('checkout')).toHaveText(new RegExp(`${total}.00`));
+            await checkCartTotal(page, total.toString());
         };
-        await expect(page.getByRole('link', { name: 'cart' })).toHaveText(/9/);
+        await checkCartCount(page, 9);
     });
 
     test('should be presented an offer after 3 in cart', async ({ page }) => {
+        await feature(myFeaturePrefixes.deals, 'Offer-3-in-cart');
+        const dealText = `It's your lucky day! Get an extra cup of Mocha for $4.`;
         let total = 0;
-        for (let i = 0; i < 3; i++) {
-            await expect(page.getByText(`It's your lucky day! Get an extra cup of Mocha for $4.`)).toBeHidden();
-            await page.getByRole('listitem').filter({has: page.getByTestId(coffeeItems[i].testid)}).click();
-            total += coffeeItems[i].price;
-            await expect(page.getByTestId('checkout')).toHaveText(new RegExp(`${total}.00`));
-        };
-        await expect(page.getByText(`It's your lucky day! Get an extra cup of Mocha for $4.`)).toBeVisible();
+        await test.step('Add 3 coffees to the cart', async () => {
+            for (let i = 0; i < 3; i++) {
+                await expect(page.getByText(dealText), 'Deal should NOT be visible').toBeHidden();
+                await addCoffeeToCart(page, coffeeItems[i].testid);
+                total += coffeeItems[i].price;
+                await checkCartTotal(page, total.toString());
+            };
+        });
+        await expect(page.getByText(dealText), 'Deal should be visible').toBeVisible();
     });
 })
