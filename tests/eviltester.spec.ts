@@ -5,6 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Evil Tester Test Page', () => {
+  test.use({baseURL: 'https://testpages.eviltester.com/styled/index.html'}); //TODO does this work after the switch from main config
   test('Should be able to observe hover behavior', async ({ page }) => {
     const topHoverText = page.getByText('paragraph');
     const bottomHoverText = page.getByText('child div content');
