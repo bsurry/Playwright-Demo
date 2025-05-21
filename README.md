@@ -28,4 +28,42 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 
 ## Links to References I used for learning and inspiration
 
-- [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simpicity discussed here so intend to use that here
+- [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simpicity discussed here so started using this
+- [Using POM with Playwright Fixtures](https://kailash-pathak.medium.com/playwright-fixtures-vs-pom-which-one-should-you-choose-d2ff01ec4f58) but then I found that I really liked the POM + fixture model here. I had used fixtures at my previous job but I think this specific method unlocks the full power of them
+
+## Running Tests
+
+To run the tests, use one of the following commands:
+
+```bash
+# Run all tests
+npx playwright test
+
+# Run tests in headed mode
+npx playwright test --headed
+
+# Run tests in specific browser
+npx playwright test --project=chromium
+```
+
+## Generating Allure Reports
+
+1. Run tests with Allure reporter:
+```bash
+npx playwright test --reporter=allure-playwright
+```
+
+2. Generate the Allure HTML report:
+```bash
+allure generate ./allure-results -o ./allure-report --clean
+```
+
+3. Open the Allure report in your default browser:
+```bash
+allure open ./allure-report
+```
+
+Note: Make sure you have Allure command-line tool installed. If not, install it using:
+```bash
+npm install -g allure-commandline
+```
