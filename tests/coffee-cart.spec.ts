@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/my-coffee-fixtures';
 import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
-import { CoffeeCartPage } from '../page-objects/coffee-cart-page';
 import coffeeItems from '../constants/coffeeDrinks';
+import { CoffeeShoppingPage } from '../page-objects/coffee-main-shopping-page';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
@@ -9,12 +9,13 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Coffee Cart Main Page', () => {
-    test('should load the coffee cart page', async ({ page }) => {
+    test('should load the coffee cart shopping page', async ({ page, coffeeShoppingPage }) => {
         await test.step('Check title and URL', async () => {
             await expect(page).toHaveTitle(/Coffee cart/i);
             await expect(page).toHaveURL(/coffee-cart/);
         });
         await test.step('Check for coffee items and prices', async () => {
+            await coffeeShoppingPage.verifyNumberOfItemsOnShoppingPage(9); //should only have 1 item
             for (const item of coffeeItems) {
                 await expect.soft(page.getByRole('listitem').getByTestId(item.testid), `${item.name} cup should be displayed`).toBeVisible();
                 await expect.soft(page.getByRole('listitem').filter({has: page.getByTestId(item.testid)}), `${item.name} text should be displayed with cup`).toHaveText(new RegExp(item.name));
@@ -73,3 +74,20 @@ test.describe('Coffee Cart - Items in cart', () => {
     );
 
 })
+
+test.describe('Coffee Cart - Use a Mocked Shopping Page', () => {
+    test('Should add a coffee to the cart from a mocked shopping page', async ({ page, coffeeShoppingPageWithMockCoffee }) => {
+        await feature(myFeaturePrefixes.addToCart, 'Add-Mocked-Coffee-to-Cart');
+        await coffeeShoppingPageWithMockCoffee.verifyNumberOfItemsOnShoppingPage(1); //should only have 1 item
+        const item = coffeeItems[0];
+        await coffeeShoppingPageWithMockCoffee.addCoffeeToCart(page, item.testid);
+        await coffeeShoppingPageWithMockCoffee.checkCartTotal(page, item.price.toString());
+        await coffeeShoppingPageWithMockCoffee.checkCartCount(page, 1);
+    });
+    test('Should handle error on mocked shopping page', async ({ page, coffeeShoppingPageWithMockError }) => {
+        await test.step('Check for error message', async () => {
+            await coffeeShoppingPageWithMockError.verifyNumberOfItemsOnShoppingPage(0); //should have no items
+            //unfortunately, there is no visibile error message on the page
+        });
+    });
+});
