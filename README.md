@@ -13,6 +13,9 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 - [Node.js](https://nodejs.org): JavaScript runtime environment.
 - [npm](https://www.npmjs.com): Package manager for JavaScript.
 - [allure-playwright](https://www.npmjs.com/package/allure-playwright): Allure Reporting integration for Playwright
+- [playwright ctrf reporter](https://github.com/ctrf-io/playwright-ctrf-json-reporter)
+- [github test reporter](https://github.com/ctrf-io/github-test-reporter)
+
 
 ## Sites to Test
 
@@ -30,6 +33,7 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 
 - [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simpicity discussed here so started using this
 - [Using POM with Playwright Fixtures](https://kailash-pathak.medium.com/playwright-fixtures-vs-pom-which-one-should-you-choose-d2ff01ec4f58) but then I found that I really liked the POM + fixture model here. I had used fixtures at my previous job but I think this specific method unlocks the full power of them
+- [Playwright results in Github Actions](https://medium.com/@ma11hewthomas/view-playwright-test-results-in-github-actions-1459f0c3b3bb)
 
 ## Running Tests
 
