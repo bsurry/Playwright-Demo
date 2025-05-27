@@ -13,6 +13,7 @@ export enum myFeaturePrefixes {
     deals = 'DEALS',
     hover = 'HOVER',
     dragDrop = 'DRAGDROP',
+    shoppingPage = 'SHOPPINGPAGE',
 }
 
 export async function tag(tag: myTags) {
