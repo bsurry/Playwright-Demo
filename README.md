@@ -13,8 +13,8 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 - [Node.js](https://nodejs.org): JavaScript runtime environment.
 - [npm](https://www.npmjs.com): Package manager for JavaScript.
 - [allure-playwright](https://www.npmjs.com/package/allure-playwright): Allure Reporting integration for Playwright
-- [playwright ctrf reporter](https://github.com/ctrf-io/playwright-ctrf-json-reporter)
-- [github test reporter](https://github.com/ctrf-io/github-test-reporter)
+- [playwright ctrf reporter](https://github.com/ctrf-io/playwright-ctrf-json-reporter): Reporter format to allow prettier github reporting
+- [github test reporter](https://github.com/ctrf-io/github-test-reporter): Github actions test reporting
 
 
 ## Sites to Test
@@ -28,6 +28,8 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 - **`tests/` Directory**: Contains example test scripts.
 - **`playwright.config.js`**: Configuration file for Playwright.
 - **`test-helpers` Directory**: contains helper functions with shared functions for using in tests
+- **`page-objects` Directory**: contains page objects for pages in the application
+- **`fixtures` Directory**: takes advantage of playwright fixtures to be able to create the page objects there and not in tests and also sometimes set up test conditions
 
 ## Links to References I used for learning and inspiration
 
