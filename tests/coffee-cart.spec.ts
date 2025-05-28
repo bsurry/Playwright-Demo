@@ -1,7 +1,6 @@
 import { test, expect } from '../fixtures/my-coffee-fixtures';
 import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
 import coffeeItems from '../constants/coffeeDrinks';
-import { CoffeeShoppingPage } from '../page-objects/coffee-main-shopping-page';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');

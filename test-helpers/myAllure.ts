@@ -14,6 +14,7 @@ export enum myFeaturePrefixes {
     hover = 'HOVER',
     dragDrop = 'DRAGDROP',
     shoppingPage = 'SHOPPINGPAGE',
+    api = 'API',
 }
 
 export async function tag(tag: myTags) {
