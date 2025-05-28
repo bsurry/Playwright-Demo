@@ -29,7 +29,7 @@ export class CoffeeShoppingPage {
     }
 
     async verifyNumberOfItemsOnShoppingPage(count: number) {
-        await feature(myFeaturePrefixes.shoppingPage, `Itens-On-Shopping-Page`);
+        await feature(myFeaturePrefixes.shoppingPage, `Items-On-Shopping-Page`);
         await test.step(`Verify number of coffee items on shopping page is ${count}`, async () => {
             const items = this.page.getByRole('list').nth(1).getByRole('listitem');//this is fragile but best I think I can do for now
             await expect(items).toHaveCount(count);
