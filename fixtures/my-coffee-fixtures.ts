@@ -62,7 +62,7 @@ export const test = base.extend<MyFixtures>({
     },
     cartWithOneCoffee: async ({ page }, use) => { //same as above except it adds a coffee to the cart and goes to cart
         const coffeeShoppingPage = new CoffeeShoppingPage(page);
-        await coffeeShoppingPage.addCoffeeToCart(page, coffeeItems[0].testid);
+        await coffeeShoppingPage.addCoffeeToCart(coffeeItems[0].testid);
         const cartWithOneCoffee = new CoffeeCartPage(page);
         await page.getByRole('link', { name: 'cart' }).click();
         await page.waitForURL(/cart/);

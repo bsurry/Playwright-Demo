@@ -11,21 +11,21 @@ export class CoffeeShoppingPage {
     }
 
 
-    async addCoffeeToCart(page: Page, coffeeTestId: string) {
+    async addCoffeeToCart(coffeeTestId: string) {
         await feature(myFeaturePrefixes.shoppingPage, `Add-${coffeeTestId}-to-Cart`);
         await test.step(`Add ${coffeeTestId} to cart`, async () => {
-            await page.getByRole('listitem').filter({has: page.getByTestId(coffeeTestId)}).click();
+            await this.page.getByRole('listitem').filter({has: this.page.getByTestId(coffeeTestId)}).click();
         });
     }
 
-    async checkCartTotal(page: Page, coffeePrice: string) {
+    async checkCartTotal( coffeePrice: string) {
         await feature(myFeaturePrefixes.shoppingPage, `Checkout-Price`);
-        await expect(page.getByTestId('checkout'), `the checkout price should be ${coffeePrice}.00`).toHaveText(new RegExp(`${coffeePrice}.00`));
+        await expect(this.page.getByTestId('checkout'), `the checkout price should be ${coffeePrice}.00`).toHaveText(new RegExp(`${coffeePrice}.00`));
     }
 
-    async checkCartCount(page: Page, count: number) {
+    async checkCartCount(count: number) {
         await feature(myFeaturePrefixes.shoppingPage, `Cart-Count`);
-        await expect(page.getByRole('link', { name: 'cart' }), `Cart Count should be ${count}`).toHaveText(new RegExp(count.toString()));
+        await expect(this.page.getByRole('link', { name: 'cart' }), `Cart Count should be ${count}`).toHaveText(new RegExp(count.toString()));
     }
 
     async verifyNumberOfItemsOnShoppingPage(count: number) {

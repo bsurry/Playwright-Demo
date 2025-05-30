@@ -27,20 +27,20 @@ test.describe('Coffee Cart Main Page', () => {
 test.describe('Coffee Cart - Add to Cart', () => {
     test('should add a coffee to the cart', async ({ page, coffeeShoppingPage }) => {
         const item = coffeeItems[0];
-        await coffeeShoppingPage.addCoffeeToCart(page, item.testid);
-        await coffeeShoppingPage.checkCartTotal(page, item.price.toString());
-        await coffeeShoppingPage.checkCartCount(page, 1);
+        await coffeeShoppingPage.addCoffeeToCart(item.testid);
+        await coffeeShoppingPage.checkCartTotal(item.price.toString());
+        await coffeeShoppingPage.checkCartCount(1);
     });
 
     test('should add multiple coffees to the cart (all 9)', async ({ page, coffeeShoppingPage }) => {
         //The add to cart process will be slowing down (intentionally) when the cart has more than 7 items. (per documentation)
         let total = 0;
         for (const item of coffeeItems) {
-            await coffeeShoppingPage.addCoffeeToCart(page, item.testid);
+            await coffeeShoppingPage.addCoffeeToCart(item.testid);
             total += item.price;
-            await coffeeShoppingPage.checkCartTotal(page, total.toString());
+            await coffeeShoppingPage.checkCartTotal(total.toString());
         };
-        await coffeeShoppingPage.checkCartCount(page, 9);
+        await coffeeShoppingPage.checkCartCount(9);
     });
 
     test('should be presented an offer after 3 in cart', async ({ page, coffeeShoppingPage }) => {
@@ -50,9 +50,9 @@ test.describe('Coffee Cart - Add to Cart', () => {
         await test.step('Add 3 coffees to the cart', async () => {
             for (let i = 0; i < 3; i++) {
                 await expect(page.getByText(dealText), 'Deal should NOT be visible').toBeHidden();
-                await coffeeShoppingPage.addCoffeeToCart(page, coffeeItems[i].testid);
+                await coffeeShoppingPage.addCoffeeToCart(coffeeItems[i].testid);
                 total += coffeeItems[i].price;
-                await coffeeShoppingPage.checkCartTotal(page, total.toString());
+                await coffeeShoppingPage.checkCartTotal(total.toString());
             };
         });
         await expect(page.getByText(dealText), 'Deal should be visible').toBeVisible();
@@ -79,9 +79,9 @@ test.describe('Coffee Cart - Use a Mocked Shopping Page', () => {
         await feature(myFeaturePrefixes.addToCart, 'Add-Mocked-Coffee-to-Cart');
         await coffeeShoppingPageWithMockCoffee.verifyNumberOfItemsOnShoppingPage(1); //should only have 1 item
         const item = coffeeItems[0];
-        await coffeeShoppingPageWithMockCoffee.addCoffeeToCart(page, item.testid);
-        await coffeeShoppingPageWithMockCoffee.checkCartTotal(page, item.price.toString());
-        await coffeeShoppingPageWithMockCoffee.checkCartCount(page, 1);
+        await coffeeShoppingPageWithMockCoffee.addCoffeeToCart(item.testid);
+        await coffeeShoppingPageWithMockCoffee.checkCartTotal(item.price.toString());
+        await coffeeShoppingPageWithMockCoffee.checkCartCount(1);
     });
     test('Should handle error on mocked shopping page', async ({ page, coffeeShoppingPageWithMockError }) => {
         await test.step('Check for error message', async () => {

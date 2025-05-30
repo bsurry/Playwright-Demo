@@ -6,7 +6,14 @@
   "author": "",
   "type": "commonjs",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:webkit": "playwright test --project=webkit",
+    "test:firefox": "playwright test --project=firefox",
+    "allure:generate": "allure generate ./allure-results -o ./allure-report --clean",
+    "allure:open": "allure open ./allure-report"
+  },
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.14.0",
