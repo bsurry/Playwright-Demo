@@ -32,7 +32,7 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: 'allure-framework/allure2'
+        ref: gh-pages
         path: allure-results/history
     - name: Build Allure Report
       uses: simple-elf/allure-report-action@v1.7
