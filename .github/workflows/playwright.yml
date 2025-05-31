@@ -27,3 +27,25 @@ jobs:
         retention-days: 30
     - name: Publish Test Summary Results
       run: npx github-actions-ctrf ctrf/ctrf-report.json
+    - name: Load Allure Test Report History
+      uses: actions/checkout@v2
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: allure-results/history
+    - name: Build Allure Report
+      uses: simple-elf/allure-report-action@v1.7
+      if: always()
+      with:
+        gh_pages: allure-results/history
+        allure_results: allure-results/
+        allure_history: allure-results/history
+    - name: Publish Allure Report
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: allure-results/history
+        publish_branch: gh-pages
+
