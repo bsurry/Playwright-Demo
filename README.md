@@ -1,6 +1,6 @@
 ## About this Repo
 
-This repository demonstrates my approach to writing Playwright tests, highlighting techniques I use, tricks I find helpful, and new concepts I'm exploring. It is designed to demonstrate my ability to automate with Playwright but also to illustrate my understanding of building a complete testing framework, including reporting, continuous integration, and more.
+This repository demonstrates my approach to writing Playwright tests, highlighting techniques I use, tricks I find helpful, and new concepts I'm exploring. It is designed to demonstrate my ability to automate with Playwright but also to illustrate my understanding of building a complete testing framework, including reporting, continuous integration, and more. On CI (guthub), the allure report is published at: [Playwright Demo Test Report](https://bsurry.github.io/Playwright-Demo/)
 
 ## About the Author
 
