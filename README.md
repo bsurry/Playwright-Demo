@@ -6,6 +6,52 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 
 [Beth Surry](https://www.linkedin.com/in/elizabeth-surry/) - I am a quality engineer with a passion for automation and testing. I enjoy writing impactful tests that fail when they are supposed to and provide quality information always.
 
+## Here's What to Check Out
+
+    Page Object + Fixtures - I create traditional page objects for pages in the application and then use Playwright's fixture capability to create them as part of test setup. This gives you the benefit of traditional page objects but puts the overhead of instatiating those objects into the fixture itself and can simply be made available to any test that needs it 
+```typescript
+    //In the fixture file:
+    coffeeShoppingPage: async ({ page }, use) => {
+        const coffeeShoppingPage = new CoffeeShoppingPage(page);
+        await use(coffeeShoppingPage);
+    },
+
+    //in a test that uses this page object, the coffeShoppingPage is created in the fixture and it exists ready to go
+    test('should add a coffee to the cart', async ({ coffeeShoppingPage }) => {
+        const item = coffeeItems[0];
+        await coffeeShoppingPage.addCoffeeToCart(item.testid);
+        await coffeeShoppingPage.checkCartTotal(item.price.toString());
+        await coffeeShoppingPage.checkCartCount(1);
+    });
+
+```
+
+    I use `test.step` where appropriate for making sections of the tests more readable (highly useful once we get viewing playwright native or allure reports)
+
+    [Custom error messages on expect statement](https://playwright.dev/docs/test-assertions#custom-expect-message) also make for clarity of steps (especially when failures occur)
+    Example:
+```typescript
+    await expect.soft(page.getByRole('listitem').filter({has: page.getByTestId(item.testid)}), `${item.name} should show price $${item.price}`).toHaveText(new RegExp(`${item.price}.00`));
+```
+
+    Allure reporter configuration - I like creating functional/behavior mapping in page object functions. This then lets us see those behaviors across tests. I created helper functions for this in the `myAllure.ts`
+
+```typescript
+export async function feature(prefix: myFeaturePrefixes, feature: string) {
+    await allure.feature(`${prefix}-${feature}`);
+}
+
+```
+this function allows us to tag any pageobject function (or part of a test) with a specific `feature` name as well as one of the `prefix` values defined in the helper. An example in this suite is `SHOPPINGPAGE-Add-Espresso-to-Cart` Then if you check out the [allure report behaviors pages](https://bsurry.github.io/Playwright-Demo/32/#behaviors/) hosted in github pages, you can see how those behaviors map in the test cases:
+![alt text](image.png)
+
+## Organization
+
+- **`tests/` Directory**: Contains example test scripts.
+- **`playwright.config.js`**: Configuration file for Playwright.
+- **`test-helpers` Directory**: contains helper functions with shared functions for using in tests
+- **`page-objects` Directory**: contains page objects for pages in the application
+- **`fixtures` Directory**: takes advantage of playwright fixtures to be able to create the page objects there and not in tests and also sometimes set up test conditions
 
 ## Tools and Packages
 
@@ -22,14 +68,6 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 - [Awesome Sites to Test on](https://github.com/BMayhew/awesome-sites-to-test-on) A list of testing sites
 - [Coffee Cart](https://coffee-cart.app/) A site that allows me to build realistic E2E scenarios
 - [Evil Tester Test Page](https://testpages.eviltester.com/styled/index.html) Test Page For Testing Specifc UI functions
-
-## Here's What to Check Out
-
-- **`tests/` Directory**: Contains example test scripts.
-- **`playwright.config.js`**: Configuration file for Playwright.
-- **`test-helpers` Directory**: contains helper functions with shared functions for using in tests
-- **`page-objects` Directory**: contains page objects for pages in the application
-- **`fixtures` Directory**: takes advantage of playwright fixtures to be able to create the page objects there and not in tests and also sometimes set up test conditions
 
 ## Links to References I used for learning and inspiration
 

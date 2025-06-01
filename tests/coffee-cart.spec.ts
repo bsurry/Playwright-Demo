@@ -25,14 +25,14 @@ test.describe('Coffee Cart Main Page', () => {
 });
 
 test.describe('Coffee Cart - Add to Cart', () => {
-    test('should add a coffee to the cart', async ({ page, coffeeShoppingPage }) => {
+    test('should add a coffee to the cart', async ({ coffeeShoppingPage }) => {
         const item = coffeeItems[0];
         await coffeeShoppingPage.addCoffeeToCart(item.testid);
         await coffeeShoppingPage.checkCartTotal(item.price.toString());
         await coffeeShoppingPage.checkCartCount(1);
     });
 
-    test('should add multiple coffees to the cart (all 9)', async ({ page, coffeeShoppingPage }) => {
+    test('should add multiple coffees to the cart (all 9)', async ({ coffeeShoppingPage }) => {
         //The add to cart process will be slowing down (intentionally) when the cart has more than 7 items. (per documentation)
         let total = 0;
         for (const item of coffeeItems) {
