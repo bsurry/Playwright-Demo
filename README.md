@@ -8,7 +8,7 @@ This repository demonstrates my approach to writing Playwright tests, highlighti
 
 ## Here's What to Check Out
 
-Page Object + Fixtures - I create traditional page objects for pages in the application and then use Playwright's fixture capability to create them as part of test setup. This gives you the benefit of traditional page objects but puts the overhead of instatiating those objects into the fixture itself and can simply be made available to any test that needs it 
+Page Object + Fixtures - I create traditional page objects for pages in the application and then use Playwright's fixture capability to create them as part of test setup. This gives you the benefit of traditional page objects but puts the overhead of instantiating those objects into the fixture itself and can simply be made available to any test that needs it 
 
 ```typescript
 //In the fixture file:
@@ -62,11 +62,11 @@ this function allows us to tag any page object function (or part of a test) with
 
 - [Awesome Sites to Test on](https://github.com/BMayhew/awesome-sites-to-test-on) A list of testing sites
 - [Coffee Cart](https://coffee-cart.app/) A site that allows me to build realistic E2E scenarios
-- [Evil Tester Test Page](https://testpages.eviltester.com/styled/index.html) Test Page For Testing Specifc UI functions
+- [Evil Tester Test Page](https://testpages.eviltester.com/styled/index.html) Test Page For Testing Specific UI functions
 
 ## Links to References I used for learning and inspiration
 
-- [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simpicity discussed here so started using this
+- [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simplicity discussed here so started using this
 - [Using POM with Playwright Fixtures](https://kailash-pathak.medium.com/playwright-fixtures-vs-pom-which-one-should-you-choose-d2ff01ec4f58) but then I found that I really liked the POM + fixture model here. I had used fixtures at my previous job but I think this specific method unlocks the full power of them
 - [Playwright results in Github Actions](https://medium.com/@ma11hewthomas/view-playwright-test-results-in-github-actions-1459f0c3b3bb)
 
