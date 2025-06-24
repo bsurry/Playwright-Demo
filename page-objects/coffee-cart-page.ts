@@ -7,7 +7,7 @@ export class CoffeeCartPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.checkoutButton = page.getByTestId('checkout');
+        this.checkoutButton = page.getByTestId('checkout').describe('Checkout Button'); // trying out new feature in version 1.53
     }
 
     async verifyNumberOfItemsInCart(count: number) {
@@ -16,7 +16,7 @@ export class CoffeeCartPage {
 
     async verifyTotalCartCost(cost: number) {
         await feature(myFeaturePrefixes.cart, `Cart-Cost`);
-        await expect(this.checkoutButton).toHaveText(`Total: $${cost.toString()}.00`);
+        await expect(this.checkoutButton, 'Verify one item in cart').toHaveText(`Total: $${cost.toString()}.00`);
     }
 
     async removeAllEspressos() {
