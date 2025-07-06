@@ -52,4 +52,30 @@ test.describe('Coffee Cart - GET API', () => {
         expect(espresso.recipe[0].name).toBe('espresso');
         expect(espresso.recipe[0].quantity).toBe(30);
     });
+
+    test('should validate schema of each coffee item', async ({ request, page }) => {
+        const response = await pwApi.get({ request, page }, urlApi);
+        const data = await response.json();
+        for (const item of data) {
+            expect(item).toHaveProperty('name');
+            expect(typeof item.name).toBe('string');
+            expect(item).toHaveProperty('price');
+            expect(typeof item.price).toBe('number');
+            expect(item).toHaveProperty('recipe');
+            expect(Array.isArray(item.recipe)).toBe(true);
+        }
+    });
+
+    test('should validate recipe ingredients', async ({ request, page }) => {
+        const response = await pwApi.get({ request, page }, urlApi);
+        const data = await response.json();
+        for (const item of data) {
+            for (const ingredient of item.recipe) {
+                expect(ingredient).toHaveProperty('name');
+                expect(typeof ingredient.name).toBe('string');
+                expect(ingredient).toHaveProperty('quantity');
+                expect(typeof ingredient.quantity).toBe('number');
+            }
+        }
+    });
 });
