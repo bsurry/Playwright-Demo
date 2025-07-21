@@ -1,7 +1,7 @@
 import { pwApi, test } from 'pw-api-plugin';
 import { expect } from '@playwright/test';
-import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
-import coffeeItems from '../constants/coffeeDrinks';
+import { tag, myTags, feature, myFeaturePrefixes } from '../../test-helpers/myAllure';
+import coffeeItems from '../../constants/coffeeDrinks';
 
 test.describe('Coffee Cart - GET API', () => {
     test.beforeEach(async () => {

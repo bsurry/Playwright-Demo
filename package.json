@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.53.1",
+    "@types/k6": "^1.1.1",
     "@types/node": "^22.14.0",
     "allure-playwright": "^3.2.1",
     "playwright-ctrf-json-reporter": "^0.0.20",

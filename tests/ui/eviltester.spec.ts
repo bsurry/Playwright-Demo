@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { tag, myTags, feature, myFeaturePrefixes } from '../test-helpers/myAllure';
+import { tag, myTags, feature, myFeaturePrefixes } from '../../test-helpers/myAllure';
 
 test.beforeEach(async ({ page }) => {
   await tag(myTags.eviltester);
