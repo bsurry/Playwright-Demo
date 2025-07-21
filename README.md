@@ -42,7 +42,9 @@ this function allows us to tag any page object function (or part of a test) with
 
 ## Organization
 
-- **`tests/` Directory**: Contains example test scripts.
+- **`tests/` Directory**: Contains all test scripts, organized into:
+  - **`ui/`**: UI and functional tests for the application (e.g., user flows, page interactions)
+  - **`performance/`**: Performance and load tests (e.g., basic k6 scripts)
 - **`playwright.config.js`**: Configuration file for Playwright.
 - **`test-helpers` Directory**: contains helper functions with shared functions for using in tests
 - **`page-objects` Directory**: contains page objects for pages in the application
@@ -75,7 +77,7 @@ this function allows us to tag any page object function (or part of a test) with
 To run the tests, use one of the following commands:
 
 ```bash
-# Run all tests
+# Run all playwright tests
 npx playwright test
 # or 
 npm test
@@ -89,6 +91,9 @@ npx playwright test --project=firefox
 npm run test:chromium
 npm run test:webkit
 npm run test:firefox
+
+#run k6 performance test
+k6 run tests/performance/test-performace-coffee.ts
 ```
 
 ## Generating Allure Reports
