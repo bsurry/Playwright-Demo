@@ -71,6 +71,7 @@ this function allows us to tag any page object function (or part of a test) with
 - [Using Functional Helpers](https://dev.to/muratkeremozcan/page-objects-vs-functional-helpers-2akj) - I did use traditional Page Objects in my last job but I do like the simplicity discussed here so started using this
 - [Using POM with Playwright Fixtures](https://kailash-pathak.medium.com/playwright-fixtures-vs-pom-which-one-should-you-choose-d2ff01ec4f58) but then I found that I really liked the POM + fixture model here. I had used fixtures at my previous job but I think this specific method unlocks the full power of them
 - [Playwright results in Github Actions](https://medium.com/@ma11hewthomas/view-playwright-test-results-in-github-actions-1459f0c3b3bb)
+- [Awesome Copilot Repo](https://github.com/github/awesome-copilot) The Playwright instructions file that I used as the basis for the `playwright-typescript.instructions.md` file
 
 ## Running Tests
 
