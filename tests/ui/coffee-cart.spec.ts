@@ -65,7 +65,7 @@ test.describe('Coffee Cart - Items in cart', () => {
     test('should have 1 item in the cart', async ({ page, cartWithOneCoffee }) => {
         await cartWithOneCoffee.verifyTotalCartCost(coffeeItems[0].price); //TODO need to get the number in a smarter way
     });
-    test('should be able to remove an item from the cart', async ({ page, cartWithOneCoffee }) => {
+    test('should be able to remove an item from the cart', async ({ cartWithOneCoffee }) => {
         await test.step('Remove item from cart', async () => {
             await cartWithOneCoffee.removeAllEspressos();
         });
@@ -75,7 +75,7 @@ test.describe('Coffee Cart - Items in cart', () => {
 })
 
 test.describe('Coffee Cart - Use a Mocked Shopping Page', () => {
-    test('Should add a coffee to the cart from a mocked shopping page', async ({ page, coffeeShoppingPageWithMockCoffee }) => {
+    test('Should add a coffee to the cart from a mocked shopping page', async ({ coffeeShoppingPageWithMockCoffee }) => {
         await feature(myFeaturePrefixes.addToCart, 'Add-Mocked-Coffee-to-Cart');
         await coffeeShoppingPageWithMockCoffee.verifyNumberOfItemsOnShoppingPage(1); //should only have 1 item
         const item = coffeeItems[0];
@@ -83,7 +83,7 @@ test.describe('Coffee Cart - Use a Mocked Shopping Page', () => {
         await coffeeShoppingPageWithMockCoffee.checkCartTotal(item.price.toString());
         await coffeeShoppingPageWithMockCoffee.checkCartCount(1);
     });
-    test('Should handle error on mocked shopping page', async ({ page, coffeeShoppingPageWithMockError }) => {
+    test('Should handle error on mocked shopping page', async ({ coffeeShoppingPageWithMockError }) => {
         await test.step('Check for error message', async () => {
             await coffeeShoppingPageWithMockError.verifyNumberOfItemsOnShoppingPage(0); //should have no items
             //unfortunately, there is no visibile error message on the page
